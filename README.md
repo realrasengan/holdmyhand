@@ -8,7 +8,7 @@ Runs an hsd spv resolver on port 53.  Does not interfere with default hsd nor Bo
 ```
 git clone https://github.com/realrasengan/holdmyhand
 cd holdmyhand
-npm install hsd systray
+npm install hsd systray sudo-prompt
 ```
 
 ## Run
