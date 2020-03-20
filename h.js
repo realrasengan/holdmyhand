@@ -1,5 +1,10 @@
 const sudo = require('sudo-prompt');
+const {exec} = require('child_process');
 const SysTray = require('systray').default;
+const os = require('os');
+
+const hs = { name: 'Handshake Naming System',
+             icns: 'hns.ico' };
 
 const systray = new SysTray({
   menu: {
@@ -7,26 +12,49 @@ const systray = new SysTray({
     title: "H",
     tooltip: "Handshake Naming System",
     items: [{
+            title: "Enable",
+            tooltip: "Instruct system to resolve with Handshake",
+            checked: false,
+            enabled: true
+            }, {
             title: "Exit",
             tooltip: "Exit and Disable Handshake Naming System",
             checked: false,
             enabled: true
-           }]
+            },
+        ]
     },
   debug: false,
   copyDir: true
 });
 
 systray.onClick(action => {
-  if (action.seq_id === 0) {
+  if (action.seq_id ===0) {
+    if(!action.item.checked) {
+      sudo.exec("./on.sh", hs, function(err, stdout, stderr) {
+        if(err) throw err;
+      });
+    }
+    else {
+      if(os.platform()=='darwin' || os.platform()=='linux') {
+        sudo.exec("./off.sh", hs, function(err, stdout, stderr) {
+          if(err) throw err;
+        });
+      }
+    }
+
+    systray.sendAction({
+      type: 'update-item',
+      item: {
+        title:"Enable",
+        checked: !action.item.checked,
+        enabled: true
+      },
+      seq_id: action.seq_id
+    });    
+  }
+  else if (action.seq_id === 1) {
     systray.kill();
   }
-});
-
-sudo.exec('node spv.js', { name: 'Handshake Naming System',
-                                icns: 'hns.ico' }, function(err, stdout, stderr) {
-  if(err)
-    throw err;
-  console.log(stdout);
 });
 

@@ -16,21 +16,11 @@ npm install hsd systray
 node h.js &
 ```
 
+## Usage
+Go to the 'H' in your System Tray and click it and choose 'Enable'.
+Click '√ Enable' to disable.
 
-## Post Installation
-#### Mac and Linux
-```
-node setns.js 127.0.0.1
-```
-
-#### Windows
-```
-netsh interface ipv4 show config
-```
-Then
-```
-netsh interface ipv4 set dns name="INTERFACE" static 127.0.0.1
-```
+Currently not working on windows.
 
 ## Copyright
 Copyright (C) 2020 The Handshake Community

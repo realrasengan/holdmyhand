@@ -29,7 +29,7 @@ setInterval(function() {
     });
   }
   else {
-    exec('pgrep node h.js',function(err,stdout,stdin) {
+    exec('pgrep -f "node h.js"', function(err,stdout,stdin) {
       if(!stdout)
         process.exit(1);
     });
@@ -42,7 +42,6 @@ setInterval(function() {
   await node.connect();
 
   node.startSync();
-
 })().catch((err) => {
   console.error(err.stack);
   process.exit(1);
