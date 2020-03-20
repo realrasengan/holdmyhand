@@ -13,23 +13,24 @@ npm install hsd systray
 
 ## Run
 ```
-node h.js
+node h.js &
 ```
+
 
 ## Post Installation
-#### Linux
-1. Edit /etc/resolv.conf
+#### Mac and Linux
 ```
-nameserver 127.0.0.1
+node setns.js 127.0.0.1
 ```
-
-#### Mac OS X
-1. Go to System Preferences -> Network -> Advanced -> DNS
-2. Set your DNS to 127.0.0.1
-3. Set the Search Domains to .
 
 #### Windows
-TODO
+```
+netsh interface ipv4 show config
+```
+Then
+```
+netsh interface ipv4 set dns name="INTERFACE" static 127.0.0.1
+```
 
 ## Copyright
 Copyright (C) 2020 The Handshake Community
